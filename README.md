@@ -66,21 +66,6 @@ flowchart TD
 
 6. **No `output_schema` with `google_search`** — the two cannot be combined on the Gemini API, so the final `ComplianceResponse` JSON is assembled in Python after validation.
 
-## Troubleshooting
-
-### 401 UNAUTHENTICATED / ACCESS_TOKEN_TYPE_UNSUPPORTED
-
-1. **Check for a duplicated key in `.env`** — if the key was pasted twice, authentication fails. Keep a single value only.
-2. **Use a valid Gemini API key** from [Google AI Studio](https://aistudio.google.com/apikey). New keys may start with `AQ.` instead of `AIza`.
-3. Ensure `GOOGLE_GENAI_USE_ENTERPRISE=0` when using the Gemini API (not Vertex AI).
-
-### 400 — google_search and Function Calling cannot be combined
-
-This project intentionally avoids `output_schema` on the agent when `google_search` is enabled. Final JSON is assembled in Python inside `before_agent_callback` instead.
-
-### 429 RESOURCE_EXHAUSTED / quota exceeded
-
-The Gemini API free tier caps `gemini-2.5-flash` at 20 requests/day. Each question uses a single call. Wait for the daily reset or enable billing for a higher quota.
 
 ## Limitations
 
